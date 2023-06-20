@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "admin"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - ./data:/var/opt/mssql/data
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: sql-server
+      PMA_PORT: 1433
+    depends_on:
+      - sql-server
