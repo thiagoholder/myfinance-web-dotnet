@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{9D821710-D9FC-4071-BBB4-06AF208803EF}|https">
+  <MonoDevelop.Ide.ItemProperties.src.WebApp PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Infraestructure/Repository/RepositoryBase.cs">
+    <Files>
+      <File FileName="src/Infraestructure/Repository/RepositoryBase.cs" Line="6" Column="27" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MyFinance" expanded="True">
+            <Node name="src" expanded="True">
+              <Node name="Infraestructure">
+                <Node name="Repository" expanded="True">
+                  <Node name="RepositoryBase.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>
