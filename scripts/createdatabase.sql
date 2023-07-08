@@ -5,7 +5,7 @@ USE myfinance
 
 /* Estrutura do Banco de dados */
 CREATE TABLE planoconta(
-	id IDENTITY NOT NULL,
+	id int IDENTITY NOT NULL,
 	descricao VARCHAR(50) NOT NULL,
 	tipo CHAR(1),
 	PRIMARY KEY (id)

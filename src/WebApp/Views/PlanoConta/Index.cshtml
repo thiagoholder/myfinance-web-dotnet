@@ -1,0 +1,23 @@
+﻿@model IEnumerable<PlanoConta>
+
+<h2>Planos de Conta</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descricao</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var planoConta in Model)
+        {
+            <tr>
+                <td>@planoConta.Id</td>
+                <td>@planoConta.Descricao</td>
+                <td>@planoConta.Tipo</td>
+            </tr>
+        }
+    </tbody>
+</table>

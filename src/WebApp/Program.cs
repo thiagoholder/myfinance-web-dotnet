@@ -1,5 +1,9 @@
+using Domain.Interface.Repository;
+using Domain.Interface.Service;
 using Infraestructure;
+using Infraestructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -8,8 +12,12 @@ var configuration = builder.Configuration;
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MyFinanceDbContext>(options =>
 {
-    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+builder.Services.AddScoped<IPlanoContaRepository, PlanoContaRepository>();
+builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
 
 var app = builder.Build();
 

@@ -6,27 +6,32 @@ namespace Infraestructure.Repository;
 
 public class RepositoryBase<T>: IRepositoryBase<T> where T : class
 {
-    protected DbContext DbContext { get; set; }
+    protected MyFinanceDbContext _dbContext;
 
-    public virtual async Task<T> GetAsync(int id) => await DbContext.Set<T>().FindAsync(id);
+    public RepositoryBase(MyFinanceDbContext dbContext)
+    {
+       _dbContext = dbContext;
+    }
 
-    public virtual async Task<IEnumerable<T>> GetAllAsync() => await DbContext.Set<T>().ToListAsync();
+    public virtual async Task<T> GetAsync(int id) => await _dbContext.Set<T>().FindAsync(id);
+
+    public virtual async Task<IEnumerable<T>> GetAllAsync() => await _dbContext.Set<T>().ToListAsync();
 
     public virtual async Task CreateAsync(T entity)
     {
-        await DbContext.Set<T>().AddAsync(entity);
-        await DbContext.SaveChangesAsync();
+        await _dbContext.Set<T>().AddAsync(entity);
+        await _dbContext.SaveChangesAsync();
     }
 
     public virtual async Task UpdateAsync(T entity)
     {
-        DbContext.Set<T>().Update(entity);
-        await DbContext.SaveChangesAsync();
+        _dbContext.Set<T>().Update(entity);
+        await _dbContext.SaveChangesAsync();
     }
 
     public virtual async Task DeleteAsync(T entity)
     {
-        DbContext.Set<T>().Remove(entity);
-        await DbContext.SaveChangesAsync();
+        _dbContext.Set<T>().Remove(entity);
+        await _dbContext.SaveChangesAsync();
     }
 }

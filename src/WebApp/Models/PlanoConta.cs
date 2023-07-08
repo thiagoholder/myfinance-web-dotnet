@@ -1,8 +1,8 @@
 namespace WebApp.Models;
 
-public class PlanoConta
+public class PlanoContaViewModel
 {
     public int Id { get; set; }
     public string Descricao { get; set; }
-    public TipoPlanoConta Tipo { get; set; }
+    public string Tipo { get; set; }
 }

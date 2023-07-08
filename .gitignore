@@ -13,6 +13,9 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+## Ignore folders
+**/wwwroot/lib
+
 # Mono auto generated files
 mono_crash.*
 
