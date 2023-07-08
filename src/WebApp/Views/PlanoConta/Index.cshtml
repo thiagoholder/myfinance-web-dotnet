@@ -1,23 +1,29 @@
 ﻿@model IEnumerable<PlanoConta>
 
-<h2>Planos de Conta</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Descricao</th>
-            <th>Tipo</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container mt-3">
+    <h2>Planos de Conta</h2>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
         @foreach (var planoConta in Model)
         {
             <tr>
-                <td>@planoConta.Id</td>
+                <th scope="row">@planoConta.Id</th>
                 <td>@planoConta.Descricao</td>
                 <td>@planoConta.Tipo</td>
+                <td>
+                    <a class="btn btn-info" asp-controller="PlanoConta" asp-action="Details" asp-route-id="@planoConta.Id">Detalhes</a>
+                    <a class="btn btn-danger" asp-controller="PlanoConta" asp-action="Apagar" asp-route-id="@planoConta.Id">Apagar</a>
+                </td>
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

@@ -15,5 +15,6 @@
       "username": "sa",
       "database": "master"
     }
-  ]
+  ],
+  "dotnet.defaultSolution": "MyFinance.sln"
 }

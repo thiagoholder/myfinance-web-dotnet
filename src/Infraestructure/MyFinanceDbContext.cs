@@ -1,8 +1,7 @@
-﻿using Domain.Model;
+﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure;
-
 public class MyFinanceDbContext : DbContext
 {
     public MyFinanceDbContext(DbContextOptions<MyFinanceDbContext> options) : base(options)
