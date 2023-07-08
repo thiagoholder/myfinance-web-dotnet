@@ -1,15 +1,15 @@
 
 namespace Domain.Interface.Repository;
 
-public class IRepositoryBase<T> where T : class
+public interface IRepositoryBase<T>
 {
-    public async Task<T> GetAsync(Guid id);
+    public Task<T> GetAsync(int id);
 
-    public async Task<IEnumerable<T>> GetAllAsync();
+    public Task<IEnumerable<T>> GetAllAsync();
 
-    public async Task CreateAsync(T entity);
+    public  Task CreateAsync(T entity);
 
-    public async Task UpdateAsync(T entity);
+    public  Task UpdateAsync(T entity);
 
-    public async Task DeleteAsync(T entity);
+    public Task DeleteAsync(T entity);
 }
