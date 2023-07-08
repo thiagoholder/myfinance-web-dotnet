@@ -1,5 +1,5 @@
 
-namespace Domain.Interface.Repository;
+namespace Domain.Interfaces.Repositories;
 
 public interface IRepositoryBase<T>
 {

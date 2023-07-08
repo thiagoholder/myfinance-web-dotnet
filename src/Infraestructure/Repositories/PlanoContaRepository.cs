@@ -1,7 +1,7 @@
-﻿using Domain.Interface.Repository;
-using Domain.Model;
+﻿using Domain.Interfaces.Repositories;
+using Domain.Models;
 
-namespace Infraestructure.Repository;
+namespace Infraestructure.Repositories;
 
 public class PlanoContaRepository : RepositoryBase<PlanoConta>, IPlanoContaRepository
 {

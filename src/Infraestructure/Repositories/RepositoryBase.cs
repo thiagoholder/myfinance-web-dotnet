@@ -1,7 +1,8 @@
-﻿using Domain.Interface.Repository;
+﻿using Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
-namespace Infraestructure.Repository;
+namespace Infraestructure.Repositories;
 
 
 public class RepositoryBase<T>: IRepositoryBase<T> where T : class
@@ -13,7 +14,10 @@ public class RepositoryBase<T>: IRepositoryBase<T> where T : class
        _dbContext = dbContext;
     }
 
-    public virtual async Task<T> GetAsync(int id) => await _dbContext.Set<T>().FindAsync(id);
+    public virtual async Task<T> GetAsync(int id)
+    {
+        return await _dbContext.Set<T>().FindAsync(id);
+    }
 
     public virtual async Task<IEnumerable<T>> GetAllAsync() => await _dbContext.Set<T>().ToListAsync();
 

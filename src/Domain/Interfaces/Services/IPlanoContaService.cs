@@ -1,6 +1,6 @@
-﻿using Domain.Model;
+﻿using Domain.Models;
 
-namespace Domain.Interface.Service;
+namespace Domain.Interfaces.Services;
 
 public interface IPlanoContaService
 {

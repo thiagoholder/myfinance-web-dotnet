@@ -1,6 +1,6 @@
-﻿using Domain.Model;
-using Domain.Interface.Repository;
-using Domain.Interface.Service;
+﻿using Domain.Models;
+using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 
 namespace Services;
 

@@ -1,7 +1,7 @@
-using Domain.Interface.Repository;
-using Domain.Interface.Service;
+using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Infraestructure;
-using Infraestructure.Repository;
+using Infraestructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Services;
 
