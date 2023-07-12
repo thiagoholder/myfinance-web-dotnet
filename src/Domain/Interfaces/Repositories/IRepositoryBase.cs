@@ -1,15 +1,15 @@
-
+    
 namespace Domain.Interfaces.Repositories;
 
-public interface IRepositoryBase<T>
+public interface IRepositoryBase<TEntity> where TEntity: class
 {
-    public Task<T> GetAsync(int id);
+    public Task<TEntity> GetAsync(int id);
 
-    public Task<IEnumerable<T>> GetAllAsync();
+    public Task<IEnumerable<TEntity>> GetAllAsync();
 
-    public  Task CreateAsync(T entity);
+    public  Task CreateAsync(TEntity entity);
 
-    public  Task UpdateAsync(T entity);
+    public  Task UpdateAsync(TEntity entity);
 
-    public Task DeleteAsync(T entity);
+    public Task DeleteAsync(TEntity entity);
 }

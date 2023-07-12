@@ -1,41 +1,41 @@
 ﻿using Domain.Interfaces.Repositories;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Infraestructure.Repositories;
 
 
-public class RepositoryBase<T>: IRepositoryBase<T> where T : class
+public abstract class RepositoryBase<TEntity>: IRepositoryBase<TEntity> where TEntity : EntityBase, new ()
 {
-    protected MyFinanceDbContext _dbContext;
+    protected DbContext Db;
+    protected DbSet<TEntity> DbSetContext;
 
-    public RepositoryBase(MyFinanceDbContext dbContext)
+    protected RepositoryBase(DbContext dbContext)
     {
-       _dbContext = dbContext;
+       Db = dbContext;
+       DbSetContext = Db.Set<TEntity>();
     }
 
-    public virtual async Task<T> GetAsync(int id)
+    public virtual async Task<TEntity> GetAsync(int id) => await DbSetContext.FirstAsync(x => x.Id == id);
+
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync() => await DbSetContext.ToListAsync();
+
+    public virtual async Task CreateAsync(TEntity entity)
     {
-        return await _dbContext.Set<T>().FindAsync(id);
+        DbSetContext.Add(entity);
+        await Db.SaveChangesAsync();
     }
 
-    public virtual async Task<IEnumerable<T>> GetAllAsync() => await _dbContext.Set<T>().ToListAsync();
-
-    public virtual async Task CreateAsync(T entity)
+    public virtual async Task UpdateAsync(TEntity entity)
     {
-        await _dbContext.Set<T>().AddAsync(entity);
-        await _dbContext.SaveChangesAsync();
+        DbSetContext.Attach(entity);
+        Db.Entry(entity).State = EntityState.Modified;
+        await Db.SaveChangesAsync();
     }
 
-    public virtual async Task UpdateAsync(T entity)
+    public virtual async Task DeleteAsync(TEntity entity)
     {
-        _dbContext.Set<T>().Update(entity);
-        await _dbContext.SaveChangesAsync();
-    }
-
-    public virtual async Task DeleteAsync(T entity)
-    {
-        _dbContext.Set<T>().Remove(entity);
-        await _dbContext.SaveChangesAsync();
+        Db.Set<TEntity>().Remove(entity);
+        await Db.SaveChangesAsync();
     }
 }
