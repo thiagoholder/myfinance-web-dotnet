@@ -21,7 +21,7 @@ Essa aplicação foi desenvolvida utilizando:
 * Docker 
 * Entity Framework.
 
-Utiliza o padrão arquitetural MVC, além da utilização de camadas - domínio, Instraestrutura, Aplicação, Serviços e Apresentação.
+Utiliza o padrão arquitetural MVC, além da utilização de camadas - Domínio, Instraestrutura, Aplicação, Serviços e Apresentação.
 
 ## 🚀 Requisitos do <My Finance Web>
 
@@ -29,9 +29,9 @@ Para instalar o <My Finance Web>, siga estas etapas:
 
 Você precisa instalar:
 
-*Visual Studio ou VS Code
-*.NET Core SDK
-*Docker compose
+* Visual Studio ou VS Code
+* .NET Core SDK
+* Docker compose
 
 
 
