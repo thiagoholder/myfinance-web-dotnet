@@ -1,7 +1,6 @@
-﻿using System;
-namespace Domain.Models
+﻿namespace MyFinance.Domain.Models
 {
-	public class Transacao
+    public class Transacao
 	{
 		public Transacao(DateTimeOffset data, decimal valor, string historico, PlanoConta planoConta)
 		{
@@ -13,7 +12,7 @@ namespace Domain.Models
 
 		public int Id { get; }
 		public DateTimeOffset Data { get; }
-		public Decimal Valor { get;}
+		public decimal Valor { get;}
 		public string Historico { get; }
 		public PlanoConta ItemPlanoConta { get; }
 	}

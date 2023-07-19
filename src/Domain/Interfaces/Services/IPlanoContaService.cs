@@ -1,13 +1,13 @@
-﻿using Domain.Models;
+﻿using MyFinance.Domain.Models;
 
-namespace Domain.Interfaces.Services;
+namespace MyFinance.Domain.Interfaces.Services;
 
 public interface IPlanoContaService
 {
-    Task<PlanoConta> GetPlanoContaAsync(int id);
+    Task<PlanoConta> GetPlanoContaAsync(Guid id);
     Task<IEnumerable<PlanoConta>> GetAllPlanosContasAsync();
     Task CreatePlanoContaAsync(PlanoConta planoConta);
     Task UpdatePlanoContaAsync(PlanoConta planoConta);
-    Task DeletePlanoContaAsync(int id);
+    Task DeletePlanoContaAsync(Guid id);
 }
 

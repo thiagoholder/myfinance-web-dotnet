@@ -1,8 +1,10 @@
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
-using Infraestructure;
-using Infraestructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using MyFinance.Application;
+using MyFinance.Application.Interfaces;
+using MyFinance.Domain.Interfaces.Repositories;
+using MyFinance.Domain.Interfaces.Services;
+using MyFinance.Infrastructure;
+using MyFinance.Infrastructure.Repositories;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +17,12 @@ builder.Services.AddDbContext<MyFinanceDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 builder.Services.AddScoped<IPlanoContaRepository, PlanoContaRepository>();
 builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
+builder.Services.AddScoped<IGetAllPlanoConta, GetAllPlanoConta>();
+builder.Services.AddScoped<IDeletePlanoConta, DeletePlanoConta>();
+builder.Services.AddScoped<IGetPlanoContaById, GetPlanoContaById>();
+builder.Services.AddScoped<IUpdatePlanoConta, UpdatePlanoConta>();
 
 var app = builder.Build();
 

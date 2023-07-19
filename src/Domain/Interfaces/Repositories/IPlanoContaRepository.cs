@@ -1,6 +1,6 @@
-﻿using Domain.Models;
+﻿using MyFinance.Domain.Models;
 
-namespace Domain.Interfaces.Repositories;
+namespace MyFinance.Domain.Interfaces.Repositories;
 
 public interface IPlanoContaRepository : IRepositoryBase<PlanoConta>
 {

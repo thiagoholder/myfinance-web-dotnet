@@ -1,91 +1,103 @@
-﻿using Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using MyFinance.Application.Dto;
+using MyFinance.Application.Interfaces;
+using MyFinance.WebApp.Models;
 
-namespace WebApp.Controllers;
+namespace MyFinance.WebApp.Controllers;
 
 public class PlanoContaController : Controller
 {
-    protected IPlanoContaService _planoContaService;
+    private readonly IGetAllPlanoConta _getAllPlanoConta;
+    private readonly IDeletePlanoConta _deletePlanoConta;
+    private readonly IGetPlanoContaById _getPlanoContaById;
+    private readonly IUpdatePlanoConta _updatePlanoConta;
 
-    public PlanoContaController(IPlanoContaService planocontaService)
+    public PlanoContaController(
+        IGetAllPlanoConta getAllPlanoConta,
+        IDeletePlanoConta deletePlanoConta,
+        IGetPlanoContaById getPlanoContaById,
+        IUpdatePlanoConta updatePlanoConta)
     {
-        _planoContaService = planocontaService;
+        _getAllPlanoConta = getAllPlanoConta;
+        _deletePlanoConta = deletePlanoConta;
+        _getPlanoContaById = getPlanoContaById;
+        _updatePlanoConta = updatePlanoConta;
     }
 
-    // GET: PlanoContaController
     public async Task<IActionResult> Index()
     {
-        var planosConta = await _planoContaService.GetAllPlanosContasAsync();
-        return View(planosConta);
+        var planoContas = await _getAllPlanoConta.ExecuteAsync();
+        var viewModel = new PlanoContaListViewModel
+        {
+            PlanoContas = planoContas.Select(pc => new Application.Dto.PlanoConta
+            {
+                Id = pc.Id,
+                Descricao = pc.Descricao,
+                Tipo = pc.Tipo
+            }).ToList()
+        };
+        return View(viewModel);
     }
 
-    // GET: PlanoContaController/Details/5
-    public ActionResult Details(int id)
+    public async Task<IActionResult> Edit(Guid id)
     {
-        return View();
+        var planoConta = await _getPlanoContaById.ExecuteAsync(id);
+
+        if (planoConta == null)
+        {
+            return NotFound();
+        }
+
+        var viewModel = new EditPlanoContaViewModel
+        {
+            Id = planoConta.Id,
+            Descricao = planoConta.Descricao,
+            Tipo = planoConta.Tipo
+        };
+
+        return View(viewModel);
     }
 
-    // GET: PlanoContaController/Create
-    public ActionResult Create()
-    {
-        return View();
-    }
-
-    // POST: PlanoContaController/Create
+    // POST: PlanoConta/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<ActionResult> Create(Domain.Models.PlanoConta planoConta)
+    public async Task<IActionResult> Edit(Guid id, EditPlanoContaViewModel viewModel)
     {
-        try
+        if (id != viewModel.Id)
         {
-            await _planoContaService.CreatePlanoContaAsync(planoConta);
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            var planoConta = new PlanoConta
+            {
+                Id = viewModel.Id,
+                Descricao = viewModel.Descricao,
+                Tipo = viewModel.Tipo
+            };
+
+            await _updatePlanoConta.ExecuteAsync(planoConta);
+
             return RedirectToAction(nameof(Index));
         }
-        catch
-        {
-            return View("Details");
-        }
+
+        return View(viewModel);
     }
 
-    // GET: PlanoContaController/Edit/5
-    public ActionResult Edit(int id)
-    {
-        return View();
-    }
-
-    // POST: PlanoContaController/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Edit(int id, IFormCollection collection)
+    public async Task<IActionResult> Create(PlanoContaListViewModel listView)
     {
-        try
-        {
-            return RedirectToAction(nameof(Index));
-        }
-        catch
-        {
-            return View();
-        }
-    }
-
-    // GET: PlanoContaController/Delete/5
-    public ActionResult Delete(int id)
-    {
-        return View();
+        return RedirectToAction(nameof(Index));
     }
 
     // POST: PlanoContaController/Delete/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id, IFormCollection collection)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        try
-        {
-            return RedirectToAction(nameof(Index));
-        }
-        catch
-        {
-            return View();
-        }
+        await _deletePlanoConta.ExecuteAsync(id);
+        return RedirectToAction(nameof(Index));
     }
 }

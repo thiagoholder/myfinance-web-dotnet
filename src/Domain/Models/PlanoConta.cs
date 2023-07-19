@@ -1,7 +1,18 @@
-﻿namespace Domain.Models;
+﻿namespace MyFinance.Domain.Models;
 
 public class PlanoConta: EntityBase
 {
-    public string Descricao { get; set;  }
-    public string Tipo { get; set; }
+    public PlanoConta(Guid id, string descricao, TipoPlanoConta tipo) : base(id)
+    {
+        Descricao = descricao;
+        Tipo = tipo;
+    }
+    public PlanoConta(string descricao, TipoPlanoConta tipo):base()
+    {
+        Descricao = descricao;
+        Tipo = tipo; 
+    }
+
+    public string Descricao { get; }
+    public TipoPlanoConta Tipo { get; set; }
 }

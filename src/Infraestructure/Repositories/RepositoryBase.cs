@@ -1,41 +1,65 @@
-﻿using Domain.Interfaces.Repositories;
-using Domain.Models;
+﻿using MyFinance.Domain.Interfaces.Repositories;
+using MyFinance.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
-namespace Infraestructure.Repositories;
-
-
-public abstract class RepositoryBase<TEntity>: IRepositoryBase<TEntity> where TEntity : EntityBase, new ()
+namespace MyFinance.Infrastructure.Repositories
 {
-    protected DbContext Db;
-    protected DbSet<TEntity> DbSetContext;
-
-    protected RepositoryBase(DbContext dbContext)
+    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase
     {
-       Db = dbContext;
-       DbSetContext = Db.Set<TEntity>();
-    }
+        protected readonly DbContext Db;
+        protected readonly DbSet<TEntity> DbSet;
 
-    public virtual async Task<TEntity> GetAsync(int id) => await DbSetContext.FirstAsync(x => x.Id == id);
+        protected RepositoryBase(DbContext dbContext)
+        {
+            Db = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            DbSet = Db.Set<TEntity>();
+        }
 
-    public virtual async Task<IEnumerable<TEntity>> GetAllAsync() => await DbSetContext.ToListAsync();
+        public virtual async Task<TEntity> GetAsync(Guid id)
+        {
+            return await DbSet.FirstOrDefaultAsync(e => e.Id == id);
+        }
 
-    public virtual async Task CreateAsync(TEntity entity)
-    {
-        DbSetContext.Add(entity);
-        await Db.SaveChangesAsync();
-    }
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await DbSet.ToListAsync();
+        }
 
-    public virtual async Task UpdateAsync(TEntity entity)
-    {
-        DbSetContext.Attach(entity);
-        Db.Entry(entity).State = EntityState.Modified;
-        await Db.SaveChangesAsync();
-    }
+        public virtual async Task CreateAsync(TEntity entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-    public virtual async Task DeleteAsync(TEntity entity)
-    {
-        Db.Set<TEntity>().Remove(entity);
-        await Db.SaveChangesAsync();
+            DbSet.Add(entity);
+            await Db.SaveChangesAsync();
+        }
+
+        public virtual async Task UpdateAsync(TEntity entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            DbSet.Attach(entity);
+            Db.Entry(entity).State = EntityState.Modified;
+            await Db.SaveChangesAsync();
+        }
+
+        public virtual async Task DeleteAsync(TEntity entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            try
+            {
+                Db.Entry(entity).State = EntityState.Deleted;
+                await Db.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception("An error occurred while trying to delete the entity. The entity may be in use.", ex);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

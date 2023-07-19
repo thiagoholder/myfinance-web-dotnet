@@ -1,29 +1,59 @@
-﻿@model IEnumerable<PlanoConta>
-
+﻿@model PlanoContaListViewModel
+@section Scripts {
+    <script src="~/js/deletemodal.js"></script>
+}
 <div class="container mt-3">
     <h2>Planos de Conta</h2>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var planoConta in Model)
-        {
-            <tr>
-                <th scope="row">@planoConta.Id</th>
-                <td>@planoConta.Descricao</td>
-                <td>@planoConta.Tipo</td>
-                <td>
-                    <a class="btn btn-info" asp-controller="PlanoConta" asp-action="Details" asp-route-id="@planoConta.Id">Detalhes</a>
-                    <a class="btn btn-danger" asp-controller="PlanoConta" asp-action="Apagar" asp-route-id="@planoConta.Id">Apagar</a>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    <div class="row justify-content-end" >
+        <div class="col-1">
+            <a class="btn btn-info" asp-controller="PlanoConta" asp-action="Create">Novo</a>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var planoConta in Model.PlanoContas)
+                        {
+                            <tr>
+                                <td>@planoConta.Descricao</td>
+                                <td>@planoConta.Tipo</td>
+                                <td>
+                                    <a class="btn btn-info" asp-controller="PlanoConta" asp-action="Edit" asp-route-id="@planoConta.Id">Editar</a>
+                                    <a class="btn btn-danger delete-button" data-url="@Url.Action("Delete", "PlanoConta", new { id = planoConta.Id })" asp-route-id="@planoConta.Id">
+                                        Apagar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                <button type="button" class="btn-close" aria-label="Close" id="closeButton"></button>
+            </div>
+            <div class="modal-body">
+                Você tem certeza que deseja excluir este Plano de Conta?
+            </div>
+            <div class="modal-footer">
+                <form method="post" id="deleteForm">
+                    <button type="button" class="btn btn-secondary" id="cancelButton">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Apagar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

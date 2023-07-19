@@ -1,9 +1,9 @@
-    
-namespace Domain.Interfaces.Repositories;
+
+namespace MyFinance.Domain.Interfaces.Repositories;
 
 public interface IRepositoryBase<TEntity> where TEntity: class
 {
-    public Task<TEntity> GetAsync(int id);
+    public Task<TEntity> GetAsync(Guid id);
 
     public Task<IEnumerable<TEntity>> GetAllAsync();
 

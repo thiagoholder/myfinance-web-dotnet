@@ -1,4 +1,4 @@
-namespace Domain;
+namespace MyFinance.Domain;
 
 public enum TipoPlanoConta
 {
