@@ -23,9 +23,9 @@ Essa aplicação foi desenvolvida utilizando:
 
 Utiliza o padrão arquitetural MVC, além da utilização de camadas - Domínio, Instraestrutura, Aplicação, Serviços e Apresentação.
 
-## 🚀 Requisitos do <My Finance Web>
+## 🚀 Requisitos do My Finance Web
 
-Para instalar o <My Finance Web>, siga estas etapas:
+Para instalar o My Finance Web, siga estas etapas:
 
 Você precisa instalar:
 
