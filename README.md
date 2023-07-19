@@ -29,9 +29,9 @@ Para instalar o <My Finance Web>, siga estas etapas:
 
 Você precisa instalar:
 
-*<Visual Studio ou VS Code>
-*<.NET Core SDK>
-*<Docker compose>
+*Visual Studio ou VS Code
+*.NET Core SDK
+*Docker compose
 
 
 
