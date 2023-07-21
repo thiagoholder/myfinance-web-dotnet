@@ -1,4 +1,4 @@
-namespace WebApp.Models;
+namespace MyFinance.WebApp.Models;
 
 public class ErrorViewModel
 {

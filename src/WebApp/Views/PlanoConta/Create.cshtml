@@ -1,0 +1,30 @@
+﻿@using MyFinance.Application.Dto;
+@model CreatePlanoContaViewModel
+
+<div class="container mt-5">
+    <h2 class="mb-4">Criar Novo Plano de Conta</h2>
+
+    <form asp-action="Create" method="post" asp-asp-controller="PlanoConta">
+        <div class="mb-3">
+            <label asp-for="Descricao" class="form-label"></label>
+            <input asp-for="Descricao" class="form-control" />
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Tipo" class="form-label"></label>
+            <select asp-for="Tipo" asp-items="Html.GetEnumSelectList<TipoPlanoConta>()" class="form-select"></select>
+            <span asp-validation-for="Tipo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

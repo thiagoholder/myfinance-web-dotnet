@@ -1,12 +1,13 @@
-﻿using Domain.Models;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+﻿using MyFinance.Domain.Models;
+using MyFinance.Domain.Interfaces.Repositories;
+using MyFinance.Domain.Interfaces.Services;
 
 namespace Services;
 
 public class PlanoContaService : IPlanoContaService
 {
     protected IPlanoContaRepository _planoContaRepository;
+
     public PlanoContaService(IPlanoContaRepository planoContaRepository)
     {
         _planoContaRepository = planoContaRepository;
@@ -17,7 +18,7 @@ public class PlanoContaService : IPlanoContaService
        await _planoContaRepository.CreateAsync(planoConta);
     }
 
-    public async Task DeletePlanoContaAsync(int id)
+    public async Task DeletePlanoContaAsync(Guid id)
     {
         var planoConta = await this.GetPlanoContaAsync(id);
         if(planoConta != null) { await _planoContaRepository.DeleteAsync(planoConta); }
@@ -29,7 +30,7 @@ public class PlanoContaService : IPlanoContaService
        return await _planoContaRepository.GetAllAsync();
     }
 
-    public async Task<PlanoConta> GetPlanoContaAsync(int id)
+    public async Task<PlanoConta> GetPlanoContaAsync(Guid id)
     {
         return await _planoContaRepository.GetAsync(id);
     }

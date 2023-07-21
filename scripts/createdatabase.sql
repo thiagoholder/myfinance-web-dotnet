@@ -1,23 +1,28 @@
-/* Criar Banco de Dados */
-CREATE DATABASE myfinance
+-- Verifica se o banco de dados existe
+IF DB_ID('myfinance') IS NULL
+BEGIN
+    -- Cria o banco de dados se ele não existir
+    CREATE DATABASE myfinance;
+END
+GO
+	USE myfinance;
+GO
 
-USE myfinance
-
-/* Estrutura do Banco de dados */
-CREATE TABLE planoconta(
-	id int IDENTITY NOT NULL,
-	descricao VARCHAR(50) NOT NULL,
-	tipo CHAR(1),
-	PRIMARY KEY (id)
-);
+IF OBJECT_ID('dbo.PlanoConta', 'U') IS NULL
+BEGIN
+	CREATE TABLE dbo.PlanoConta(
+		Id UNIQUEIDENTIFIER PRIMARY KEY,
+		Descricao VARCHAR(50) NOT NULL,
+		Tipo INT NOT NULL
+	);
 
 
-
-/* Inserir primeira carga de dados */
-INSERT INTO planoconta(descricao, tipo) VALUES('Combustível', 'D')
-INSERT INTO planoconta(descricao, tipo) VALUES('Salário', 'R')
-INSERT INTO planoconta(descricao, tipo) VALUES('Alimentação', 'D')
-INSERT INTO planoconta(descricao, tipo) VALUES('Impostos', 'D')
-INSERT INTO planoconta(descricao, tipo) VALUES('Água', 'D')
-INSERT INTO planoconta(descricao, tipo) VALUES('Luz', 'D')
-INSERT INTO planoconta(descricao, tipo) VALUES('Internet', 'D')
+	INSERT INTO dbo.PlanoConta(Id,Descricao, Tipo) VALUES(NEWID(),'Combustível', 0)
+	INSERT INTO dbo.PlanoConta(Id,Descricao, Tipo) VALUES(NEWID(),'Salário', 1)
+	INSERT INTO dbo.PlanoConta(Id,Descricao, Tipo) VALUES(NEWID(),'Alimentação', 0)
+	INSERT INTO dbo.PlanoConta(Id,Descricao, Tipo) VALUES(NEWID(),'Impostos', 0)
+	INSERT INTO dbo.PlanoConta(Id,Descricao, Tipo) VALUES(NEWID(),'Água', 0)
+	INSERT INTO dbo.PlanoConta(Id,Descricao, Tipo) VALUES(NEWID(),'Luz', 0)
+	INSERT INTO dbo.PlanoConta(Id,Descricao, Tipo) VALUES(NEWID(),'Internet', 0)
+	END
+GO
