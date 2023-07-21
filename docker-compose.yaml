@@ -1,12 +1,40 @@
 version: '3.9'
+
 services:
   sql-server:
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
-      - 5434:1433
+      - 1433:1433
     environment:
       MSSQL_SA_PASSWORD: "Pass@w0rd"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer"
     volumes:
       - ./data:/var/opt/mssql/data
+    networks:
+      - myfinancenet
+
+  sql-scripts:
+    image: mcr.microsoft.com/mssql-tools
+    volumes:
+      - ./scripts/createdatabase.sql:/tmp/createdatabase.sql
+      - ./init-database.sh:/tmp/init-database.sh
+    depends_on:
+      - sql-server
+    command: /bin/bash /tmp/init-database.sh
+    networks:
+      - myfinancenet
+  myfinance-webapp:
+    build: 
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+    ports:
+      - 5000:80
+    depends_on:
+      - sql-scripts
+    networks:
+      - myfinancenet
+networks:
+  myfinancenet:

@@ -23,6 +23,7 @@ builder.Services.AddScoped<IGetAllPlanoConta, GetAllPlanoConta>();
 builder.Services.AddScoped<IDeletePlanoConta, DeletePlanoConta>();
 builder.Services.AddScoped<IGetPlanoContaById, GetPlanoContaById>();
 builder.Services.AddScoped<IUpdatePlanoConta, UpdatePlanoConta>();
+builder.Services.AddScoped<ICreatePlanoConta, CreatePlanoConta>();
 
 var app = builder.Build();
 

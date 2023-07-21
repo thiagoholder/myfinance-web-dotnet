@@ -1,12 +1,10 @@
 ﻿@using MyFinance.Application.Dto;
-@model EditPlanoContaViewModel
+@model CreatePlanoContaViewModel
 
 <div class="container mt-5">
-    <h2 class="mb-4">Editar Plano COnta</h2>
+    <h2 class="mb-4">Criar Novo Plano de Conta</h2>
 
-    <form asp-controller="PlanoConta" asp-action="Edit" method="post" class="p-5">
-        <input type="hidden" asp-for="Id" />
-
+    <form asp-action="Create" method="post" asp-asp-controller="PlanoConta">
         <div class="mb-3">
             <label asp-for="Descricao" class="form-label"></label>
             <input asp-for="Descricao" class="form-control" />
@@ -24,7 +22,6 @@
         </div>
     </form>
 </div>
-
 
 @section Scripts {
     @{

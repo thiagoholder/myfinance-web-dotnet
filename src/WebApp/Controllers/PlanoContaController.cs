@@ -11,17 +11,20 @@ public class PlanoContaController : Controller
     private readonly IDeletePlanoConta _deletePlanoConta;
     private readonly IGetPlanoContaById _getPlanoContaById;
     private readonly IUpdatePlanoConta _updatePlanoConta;
+    private readonly ICreatePlanoConta _createPlanoConta;
 
     public PlanoContaController(
         IGetAllPlanoConta getAllPlanoConta,
         IDeletePlanoConta deletePlanoConta,
         IGetPlanoContaById getPlanoContaById,
-        IUpdatePlanoConta updatePlanoConta)
+        IUpdatePlanoConta updatePlanoConta,
+        ICreatePlanoConta createPlanoConta)
     {
         _getAllPlanoConta = getAllPlanoConta;
         _deletePlanoConta = deletePlanoConta;
         _getPlanoContaById = getPlanoContaById;
         _updatePlanoConta = updatePlanoConta;
+        _createPlanoConta = createPlanoConta;
     }
 
     public async Task<IActionResult> Index()
@@ -85,10 +88,28 @@ public class PlanoContaController : Controller
         return View(viewModel);
     }
 
+    public IActionResult Create()
+    {
+        return View();
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(PlanoContaListViewModel listView)
+    public async Task<IActionResult> Create(CreatePlanoContaViewModel viewModel)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(viewModel);
+        }
+
+        var planoContaDto = new PlanoConta
+        {
+            Descricao = viewModel.Descricao,
+            Tipo = viewModel.Tipo
+        };
+
+        await _createPlanoConta.ExecuteAsync(planoContaDto);
+
         return RedirectToAction(nameof(Index));
     }
 

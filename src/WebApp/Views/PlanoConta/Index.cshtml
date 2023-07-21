@@ -24,7 +24,7 @@
                         {
                             <tr>
                                 <td>@planoConta.Descricao</td>
-                                <td>@planoConta.Tipo</td>
+                                <td>@planoConta.Tipo.GetDisplayName()</td>
                                 <td>
                                     <a class="btn btn-info" asp-controller="PlanoConta" asp-action="Edit" asp-route-id="@planoConta.Id">Editar</a>
                                     <a class="btn btn-danger delete-button" data-url="@Url.Action("Delete", "PlanoConta", new { id = planoConta.Id })" asp-route-id="@planoConta.Id">
