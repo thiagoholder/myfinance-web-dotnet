@@ -85,3 +85,4 @@ Você precisa instalar:
     ```bash
     dotnet run --project src/WebApp/WebApp.csproj
     ```
+6. No navegador utilize http://localhost:5058
