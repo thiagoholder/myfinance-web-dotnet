@@ -13,6 +13,6 @@ public class PlanoConta: EntityBase
         Tipo = tipo; 
     }
 
-    public string Descricao { get; }
-    public TipoPlanoConta Tipo { get; set; }
+    public string Descricao { get; private set; }
+    public TipoPlanoConta Tipo { get; private set; }
 }

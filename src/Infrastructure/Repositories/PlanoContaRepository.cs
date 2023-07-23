@@ -1,6 +1,5 @@
 ﻿using MyFinance.Domain.Interfaces.Repositories;
 using MyFinance.Domain.Models;
-using MyFinance.Infrastructure.Repositories;
 
 namespace MyFinance.Infrastructure.Repositories;
 

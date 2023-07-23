@@ -23,6 +23,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infrastructure", "3 - Infrastructure", "{249E9301-AAB3-4A18-926A-ECFAB1AF8F39}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{189CC06C-47C6-44B5-8B2D-457FCCD40713}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\createdatabase.sql = scripts\createdatabase.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{A96C9C7E-881B-427C-8C43-59F266514EB7}"
+	ProjectSection(SolutionItems) = preProject
+		docker\app\Dockerfile = docker\app\Dockerfile
+		init-database.sh = init-database.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,5 +74,8 @@ Global
 		{6BCB4A90-52D6-470C-A8F5-2184E6EC356E} = {692314DB-942E-43F0-B748-5BCF83B09EEE}
 		{7F366F78-B6B8-4D79-8379-2C1409FF3959} = {692314DB-942E-43F0-B748-5BCF83B09EEE}
 		{249E9301-AAB3-4A18-926A-ECFAB1AF8F39} = {692314DB-942E-43F0-B748-5BCF83B09EEE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF27FEB8-CE73-4951-BB4F-F2A9494BB822}
 	EndGlobalSection
 EndGlobal
