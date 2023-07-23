@@ -2,7 +2,7 @@
 using MyFinance.Domain.Interfaces.Repositories;
 using MyFinance.Domain.Interfaces.Services;
 
-namespace Services;
+namespace MyFinance.Services;
 
 public class PlanoContaService : IPlanoContaService
 {

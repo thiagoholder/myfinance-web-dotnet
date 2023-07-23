@@ -1,0 +1,46 @@
+﻿@using MyFinance.Application.Dto;
+@model TransacaoCreateViewModel
+
+<div class="container mt-5">
+    <h2 class="mb-4">Create Transacao</h2>
+
+    <form asp-controller="Transacao" asp-action="Create" method="post" class="p-5">
+
+        <div class="mb-3">
+            <label asp-for="Historico" class="form-label"></label>
+            <input asp-for="Historico" class="form-control" />
+            <span asp-validation-for="Historico" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Data" class="form-label"></label>
+            <input asp-for="Data" class="form-control"/>
+            <span asp-validation-for="Data" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Valor" class="form-label"></label>
+            <input asp-for="Valor" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="Valor" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PlanoContaId">Plano de Conta</label>
+            <select asp-for="PlanoContaId" asp-items="ViewBag.PlanosConta" class="form-control">
+                <option value="">-- Selecione --</option>
+            </select>
+            <span asp-validation-for="PlanoContaId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

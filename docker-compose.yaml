@@ -24,17 +24,5 @@ services:
     command: /bin/bash /tmp/init-database.sh
     networks:
       - myfinancenet
-  myfinance-webapp:
-    build: 
-      context: .
-      dockerfile: ./docker/app/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Docker
-    ports:
-      - 5000:80
-    depends_on:
-      - sql-scripts
-    networks:
-      - myfinancenet
 networks:
   myfinancenet:

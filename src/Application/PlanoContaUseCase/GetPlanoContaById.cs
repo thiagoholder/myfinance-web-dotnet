@@ -13,16 +13,15 @@ public class GetPlanoContaById : IGetPlanoContaById
         service = planoContaService;
     }
 
-    public async Task<PlanoConta> ExecuteAsync(Guid id)
+    public async Task<PlanoConta?> ExecuteAsync(Guid id)
     {
         var planoContaDomain = await service.GetPlanoContaAsync(id);
-        var planoContaMapper = new PlanoConta
-        {
-            Id = planoContaDomain.Id,
-            Descricao = planoContaDomain.Descricao,
-            Tipo = (TipoPlanoConta)planoContaDomain.Tipo
-        };
 
-        return planoContaMapper;
+        if (planoContaDomain == null)
+        {
+            return null;
+        }
+
+        return new PlanoConta { Id = planoContaDomain.Id, Descricao = planoContaDomain.Descricao, Tipo = (TipoPlanoConta)planoContaDomain.Tipo };
     }
 }

@@ -51,14 +51,12 @@ public class PlanoContaController : Controller
             return NotFound();
         }
 
-        var viewModel = new EditPlanoContaViewModel
+        return View(new EditPlanoContaViewModel
         {
             Id = planoConta.Id,
             Descricao = planoConta.Descricao,
             Tipo = planoConta.Tipo
-        };
-
-        return View(viewModel);
+        });
     }
 
     // POST: PlanoConta/Edit/5

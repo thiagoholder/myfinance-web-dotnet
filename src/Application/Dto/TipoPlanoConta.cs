@@ -1,15 +1,13 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyFinance.Application.Dto
 {
-	public enum TipoPlanoConta
-	{
+    public enum TipoPlanoConta
+    {
         [Display(Name = "Débito")]
         Debito = 0,
+
         [Display(Name = "Crédito")]
         Credito = 1,
     }
 }
-

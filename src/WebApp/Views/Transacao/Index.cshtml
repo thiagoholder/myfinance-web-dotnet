@@ -1,0 +1,63 @@
+﻿@model TransacaoListViewModel
+@section Scripts {
+    <script src="~/js/deletemodal.js"></script>
+}
+<div class="container mt-3">
+    <h2>Transações</h2>
+    <div class="row justify-content-end" >
+        <div class="col-1">
+            <a class="btn btn-info" asp-controller="Transacao" asp-action="Create">Novo</a>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Historico</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Acoes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var transacao in Model.Transacoes)
+                        {
+                            <tr>
+                                <td>@transacao.Historico</td>
+                                <td>@transacao.Valor</td>
+                                <td>@transacao.Data.ToString("dd/MM/yyyy")</td>
+                                <td>@transacao.PlanoConta</td>
+                                <td>
+                                    <a class="btn btn-info" asp-controller="Transacao" asp-action="Edit" asp-route-id="@transacao.Id">Editar</a>
+                                    <a class="btn btn-danger delete-button" data-url="@Url.Action("Delete", "Transacao", new { id = transacao.Id })" asp-route-id="@transacao.Id">
+                                        Apagar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                <button type="button" class="btn-close" aria-label="Close" id="closeButton"></button>
+            </div>
+            <div class="modal-body">
+                Você tem certeza que deseja excluir esta Transacao?
+            </div>
+            <div class="modal-footer">
+                <form method="post" id="deleteForm">
+                    <button type="button" class="btn btn-secondary" id="cancelButton">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Apagar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
