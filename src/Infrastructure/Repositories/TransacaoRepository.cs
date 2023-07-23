@@ -10,8 +10,7 @@ public class TransacaoRepository : RepositoryBase<Transacao>, ITransacaoReposito
     {
     }
 
-    public override async Task<IEnumerable<Transacao>> GetAllAsync()
-    {
-        return await base.DbSet.Include(t => t.ItemPlanoConta).ToListAsync();
-    }
+    public override async Task<IEnumerable<Transacao>> GetAllAsync() => await base.DbSet.Include(t => t.ItemPlanoConta).ToListAsync();
+
+    public override async Task<Transacao> GetAsync(Guid id) => await base.DbSet.Include(t => t.ItemPlanoConta).FirstOrDefaultAsync(e => e.Id == id);
 }

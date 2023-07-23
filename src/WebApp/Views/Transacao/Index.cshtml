@@ -27,7 +27,7 @@
                             <tr>
                                 <td>@transacao.Historico</td>
                                 <td>@transacao.Valor</td>
-                                <td>@transacao.Data</td>
+                                <td>@transacao.Data.ToString("dd/MM/yyyy")</td>
                                 <td>@transacao.PlanoConta</td>
                                 <td>
                                     <a class="btn btn-info" asp-controller="Transacao" asp-action="Edit" asp-route-id="@transacao.Id">Editar</a>

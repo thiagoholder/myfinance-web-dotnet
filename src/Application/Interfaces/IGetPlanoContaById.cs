@@ -4,6 +4,6 @@ namespace MyFinance.Application.Interfaces
 {
     public interface IGetPlanoContaById
     {
-        Task<PlanoConta> ExecuteAsync(Guid id);
+        Task<PlanoConta?> ExecuteAsync(Guid id);
     }
 }
