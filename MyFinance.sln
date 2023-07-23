@@ -30,7 +30,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{189C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{A96C9C7E-881B-427C-8C43-59F266514EB7}"
 	ProjectSection(SolutionItems) = preProject
-		docker\app\Dockerfile = docker\app\Dockerfile
 		init-database.sh = init-database.sh
 	EndProjectSection
 EndProject
