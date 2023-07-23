@@ -13,19 +13,22 @@ public class TransacaoController : Controller
     private readonly IGetTransacaoById _getTransacaoById;
     private readonly IGetAllPlanoConta _getAllPlanoConta;
     private readonly IUpdateTransacao _updateTransacao;
+    private readonly ICreateTransacao _createTransacao;
 
     public TransacaoController(
         IGetAllTransacoes getAllTransacoes,
         IDeleteTransacao deleteTransacao,
         IGetTransacaoById getTransacaoById,
         IGetAllPlanoConta getAllPlanoConta,
-        IUpdateTransacao updateTransacao)
+        IUpdateTransacao updateTransacao,
+        ICreateTransacao createTransacao)
     {
         _getAllTransacoes = getAllTransacoes;
         _deleteTransacao = deleteTransacao;
         _getTransacaoById = getTransacaoById;
         _getAllPlanoConta = getAllPlanoConta;
         _updateTransacao = updateTransacao;
+        _createTransacao = createTransacao;
     }
 
     public async Task<IActionResult> Index()
@@ -46,23 +49,32 @@ public class TransacaoController : Controller
         return View(viewModel);
     }
 
-    public ActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        ViewBag.PlanosConta = await SetPlanoContas();
         return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
+    public async Task<IActionResult> Create(TransacaoCreateViewModel viewModel)
     {
-        try
+        if (!ModelState.IsValid)
         {
-            return RedirectToAction(nameof(Index));
+            return View(viewModel);
         }
-        catch
+
+        var transacaoDto = new Transacao
         {
-            return View();
-        }
+            Historico = viewModel.Historico,
+            Valor = viewModel.Valor,
+            Data = viewModel.Data,
+            PlanoContaId = viewModel.PlanoContaId,
+        };
+
+        await _createTransacao.ExecuteAsync(transacaoDto);
+
+        return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> Edit(Guid id)

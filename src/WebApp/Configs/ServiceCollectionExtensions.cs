@@ -31,6 +31,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDeleteTransacao, DeleteTrancao>();
         services.AddScoped<IGetTransacaoById, GetTransacaoById>();
         services.AddScoped<IUpdateTransacao, UpdateTransacao>();
+        services.AddScoped<ICreateTransacao, CreateTransacao>();
 
         return services;
     }
