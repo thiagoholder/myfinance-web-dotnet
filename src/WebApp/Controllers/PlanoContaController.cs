@@ -29,6 +29,11 @@ public class PlanoContaController : Controller
 
     public async Task<IActionResult> Index()
     {
+        if (TempData.TryGetValue("ErrorMessage", out var errorMessage))
+        {
+            ViewBag.ErrorMessage = errorMessage.ToString();
+        }
+
         var planoContas = await _getAllPlanoConta.ExecuteAsync();
         var viewModel = new PlanoContaListViewModel
         {
@@ -116,7 +121,17 @@ public class PlanoContaController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(Guid id)
     {
-        await _deletePlanoConta.ExecuteAsync(id);
+        try
+        {
+            await _deletePlanoConta.ExecuteAsync(id);
+        }
+        catch (Exception ex)
+        {
+
+            TempData["ErrorMessage"] = ex.Message;
+        }
+
         return RedirectToAction(nameof(Index));
+
     }
 }

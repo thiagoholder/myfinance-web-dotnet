@@ -34,6 +34,14 @@ public class TransacaoService : ITransacaoService
         return await _transacaoRepository.GetAsync(id);
     }
 
+    public async Task<bool> IsPlanoContaAssociatedWithTransacao(Guid id)
+    {
+        var transacaoComPlanoConta = await this.GetAllTransacoesAsync();
+        var transacoesEncontradas = transacaoComPlanoConta.FirstOrDefault(x => x.ItemPlanoConta.Id == id);
+
+        return transacoesEncontradas != null;
+    }
+
     public async Task UpdateTransacaAsync(Transacao transacao)
     {
         await _transacaoRepository.UpdateAsync(transacao);
