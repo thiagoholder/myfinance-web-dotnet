@@ -9,4 +9,5 @@ public interface ITransacaoService
     Task CreateTransacaoAsync(Transacao transacao);
     Task UpdateTransacaAsync(Transacao transacao);
     Task DeteleTransacaoAsync(Guid id);
+    Task<bool> IsPlanoContaAssociatedWithTransacao(Guid id);
 }
