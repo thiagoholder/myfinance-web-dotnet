@@ -28,7 +28,6 @@ builder.Services.AddDbContext<MyFinanceDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 });
 
-
 //Registers
 builder.Services
     .RegisterPlanoConta()
@@ -37,12 +36,7 @@ builder.Services
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+app.UseExceptionHandler("/Home/Error");
 
 app.UseRequestLocalization(localizationOptions); // Aplica as configurações de localização definidas anteriormente
 
@@ -50,8 +44,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

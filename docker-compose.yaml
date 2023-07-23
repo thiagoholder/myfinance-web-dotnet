@@ -12,7 +12,7 @@ services:
     volumes:
       - ./data:/var/opt/mssql/data
     networks:
-      - sqlnet
+      - myfinancenet
 
   sql-scripts:
     image: mcr.microsoft.com/mssql-tools
@@ -23,6 +23,6 @@ services:
       - sql-server
     command: /bin/bash /tmp/init-database.sh
     networks:
-      - sqlnet
+      - myfinancenet
 networks:
-  sqlnet:
+  myfinancenet:
